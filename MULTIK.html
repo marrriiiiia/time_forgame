@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> DEJA VU </title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вставка видео YouTube</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 100px;
+        }
+        iframe {
+            max-width: 90%;
+            height: 360px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html">ГЛАВНОЕ</a>
+            <a href="game2.html">ЗМЕЙКА</a>
+            <a href="igra.html">ТРИ РЯДА</a>
+            <a href="SKAZKA.html">СКАЗКИ</a>
+            <a href="MULTIK.html">МУЛЬТИКИ</a>
+            <a href="hudo.html">САМ СЕБЕ ХУДОЖНИК</a>
+        </nav>
+
+        <form action="#" class="search-bar">
+            <input type="text" placeholder="Search...
+            ">
+            <button type="submit"> <i claas='bx bx-search'></i></button>
+        </form>
+    </header>
+
+
+
+<!-- Вставляем видео -->
+<iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/watch?v=GCXLxkU0x2I&ab_channel=KidsTvRussia-%D0%BF%D0%B5%D1%81%D0%B5%D0%BD%D0%BA%D0%B8%D0%B4%D0%BB%D1%8F%D0%B4%D0%B5%D1%82%D0%B5%D0%B9" 
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+</iframe>
+
+<!-- Кнопка для паузы и воспроизведения -->
+<button id="toggleVideo">Пауза / Воспроизведение</button>
+
+<script>
+    // Получаем доступ к iframe
+    const iframe = document.querySelector('iframe');
+    const player = new YT.Player(iframe);
+
+    // Загружаем YouTube API
+    function onYouTubeIframeAPIReady() {
+        const toggleButton = document.getElementById('toggleVideo');
+
+        // Обработчик события нажатия кнопки
+        toggleButton.addEventListener('click', function () {
+            if (player.playVideo) {
+                player.getPlayerState().then(function(state) {
+                    if (state === 1) { // Играет
+                        player.pauseVideo();
+                    } else {
+                        player.playVideo();
+                    }
+                });
+            }
+        });
+    }
+
+    // Подключаем YouTube API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+</script>
+
+</body>
+</html>
